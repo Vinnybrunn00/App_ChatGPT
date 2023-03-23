@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'ChatGPT by Vinny',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
             scaffoldBackgroundColor: scaffoldBackgroundColor,

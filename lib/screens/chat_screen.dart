@@ -46,6 +46,11 @@ class _ChatScreenState extends State<ChatScreen> {
     final modelsProvider = Provider.of<ModelsProvider>(context);
     final chatProvider = Provider.of<ChatProvider>(context);
     return Scaffold(
+      //floatingActionButton: FloatingActionButton(
+      //  backgroundColor: Color.fromARGB(255, 0, 174, 136),
+      //  onPressed: () {},
+      //  child: const Icon(Icons.link_outlined),
+      //),
       appBar: AppBar(
         elevation: 2,
         leading: Padding(
@@ -88,9 +93,11 @@ class _ChatScreenState extends State<ChatScreen> {
                 height: 15,
               ),
               Material(
+                borderRadius: const BorderRadius.vertical(
+                    top: Radius.circular(20), bottom: Radius.circular(20)),
                 color: cardColor,
                 child: Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(5.0),
                   child: Row(
                     children: [
                       Expanded(
@@ -104,8 +111,10 @@ class _ChatScreenState extends State<ChatScreen> {
                                 chatProvider: chatProvider);
                           },
                           decoration: const InputDecoration.collapsed(
-                              hintText: "Mensagem",
-                              hintStyle: TextStyle(color: Colors.grey)),
+                              border: UnderlineInputBorder(),
+                              hintText: "Como posso te ajudar?",
+                              hintStyle: TextStyle(
+                                  color: Color.fromARGB(255, 159, 159, 159))),
                         ),
                       ),
                       IconButton(
@@ -116,8 +125,8 @@ class _ChatScreenState extends State<ChatScreen> {
                             );
                           },
                           icon: const Icon(
-                            Icons.send,
-                            color: Colors.white,
+                            Icons.send_outlined,
+                            color: Color(0xFF00B181),
                           ))
                     ],
                   ),

@@ -39,7 +39,7 @@ class _ModelsDrowDownWidgetState extends State<ModelsDrowDownWidget> {
                             value: snapshot.data![index].id,
                             child: Textwidget(
                               label: snapshot.data![index].id,
-                              fontSize: 15,
+                              fontSize: 16,
                             ))),
                     value: currentModel,
                     onChanged: (value) {
