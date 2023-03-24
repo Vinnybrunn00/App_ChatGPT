@@ -56,25 +56,24 @@ class _ChatScreenState extends State<ChatScreen> {
 
     return Scaffold(
       floatingActionButton: GestureDetector(
-        onTap: () {
-          try {
-            _launchUrl();
-            print('click');
-          } catch (e) {
-            print('error $e');
-          }
-        },
         child: Container(
-          padding: const EdgeInsets.all(10),
-          margin: const EdgeInsets.only(bottom: 55),
-          decoration: BoxDecoration(
-              color: const Color.fromARGB(255, 0, 177, 129),
-              borderRadius: BorderRadius.circular(50)),
-          child: const Icon(
-            Icons.link_rounded,
-            color: Colors.white,
-          ),
-        ),
+            padding: const EdgeInsets.all(4),
+            margin: const EdgeInsets.only(bottom: 65),
+            decoration: BoxDecoration(
+                color: const Color.fromARGB(255, 0, 177, 129),
+                borderRadius: BorderRadius.circular(50)),
+            child: IconButton(
+              icon: Image.asset('assets/images/github.png'),
+              iconSize: 21,
+              onPressed: () {
+                try {
+                  _launchUrl();
+                  print('click');
+                } catch (e) {
+                  print('error $e');
+                }
+              },
+            )),
       ),
       appBar: AppBar(
         elevation: 2,
@@ -115,11 +114,10 @@ class _ChatScreenState extends State<ChatScreen> {
                 height: 15,
               ),
               Container(
-                margin: const EdgeInsets.all(10),
+                margin: const EdgeInsets.all(11),
                 child: Material(
-                  elevation: 50.0,
-                  shadowColor: const Color.fromARGB(255, 0, 51, 58),
-                  borderRadius: BorderRadius.circular(20),
+                  shadowColor: Colors.cyan,
+                  borderRadius: BorderRadius.circular(16),
                   color: cardColor,
                   child: Row(
                     children: [
