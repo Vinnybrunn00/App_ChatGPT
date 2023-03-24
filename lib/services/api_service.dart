@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:io';
-import 'dart:convert' show utf8;
 import 'package:chatgpt/constants/api_consts.dart';
 import 'package:chatgpt/models/chat_model.dart';
 import 'package:chatgpt/models/models_model.dart';

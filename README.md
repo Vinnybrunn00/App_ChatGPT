@@ -1,10 +1,15 @@
 # chatgpt
 
-A new Flutter project.
+[App_ChatGPT](https://github.com/Vinnybrunn00/App_ChatGPT) was developed in Flutter for IOS/Android
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+### Building android [APK](https://docs.flutter.dev/deployment/android)
+
+```
+> flutter build apk
+```
+
+## Documentation
 
 A few resources to get you started if this is your first Flutter project:
 

@@ -1,5 +1,6 @@
 import 'package:chatgpt/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
+import '../constants/api_consts.dart';
 import '../providers/chat_provider.dart';
 import '../providers/models_provider.dart';
 import '../services/services.dart';
@@ -7,6 +8,7 @@ import '/constants/constants.dart';
 import '/widgets/chat_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
@@ -37,6 +39,15 @@ class _ChatScreenState extends State<ChatScreen> {
     super.dispose();
   }
 
+  Future<void> _launchUrl() async {
+    if (!await launchUrl(
+      Uri.parse('$REPO_URL'),
+      mode: LaunchMode.externalApplication,
+    )) {
+      throw Exception('Could not launch $_launchUrl');
+    }
+  }
+
   //List<ChatModel> chatList = [];
   @override
   Widget build(BuildContext context) {
@@ -45,8 +56,13 @@ class _ChatScreenState extends State<ChatScreen> {
 
     return Scaffold(
       floatingActionButton: GestureDetector(
-        onTap: () async {
-          print('xuxa');
+        onTap: () {
+          try {
+            _launchUrl();
+            print('click');
+          } catch (e) {
+            print('error $e');
+          }
         },
         child: Container(
           padding: const EdgeInsets.all(10),
@@ -98,14 +114,13 @@ class _ChatScreenState extends State<ChatScreen> {
               const SizedBox(
                 height: 15,
               ),
-              Material(
-                elevation: 50.0,
-                shadowColor: const Color.fromARGB(255, 0, 51, 58),
-                borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(10), bottom: Radius.circular(5)),
-                color: cardColor,
-                child: Padding(
-                  padding: const EdgeInsets.only(),
+              Container(
+                margin: const EdgeInsets.all(10),
+                child: Material(
+                  elevation: 50.0,
+                  shadowColor: const Color.fromARGB(255, 0, 51, 58),
+                  borderRadius: BorderRadius.circular(20),
+                  color: cardColor,
                   child: Row(
                     children: [
                       Expanded(
@@ -121,7 +136,10 @@ class _ChatScreenState extends State<ChatScreen> {
                                 modelsProvider: modelsProvider,
                                 chatProvider: chatProvider);
                           },
-                          decoration: const InputDecoration.collapsed(
+                          decoration: const InputDecoration(
+                            contentPadding: EdgeInsets.only(left: 10),
+                            border: InputBorder.none,
+                            isCollapsed: true,
                             hintText: null,
                           ),
                         ),
