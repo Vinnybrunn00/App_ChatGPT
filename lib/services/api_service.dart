@@ -38,7 +38,7 @@ class ApiService {
     // try aqui
     // try {
     print("modelId > $modelId");
-    var response = await http.post(Uri.parse("$BASE_URL/completions"),
+    var response = await http.post(Uri.parse("$BASE_URL/chat/completions"),
         headers: {
           'Authorization': 'Bearer $API_KEY',
           "Content-Type": "application/json"
@@ -46,12 +46,14 @@ class ApiService {
         body: jsonEncode(
           {
             "model": modelId,
-            "prompt": message,
+            "messages": [
+              {"role": "user", "content": message}
+            ],
             "max_tokens": 1000,
           },
         ));
 
-    Map jsonResponse = json.decode(utf8.decode(response.bodyBytes));
+    var jsonResponse = json.decode(utf8.decode(response.bodyBytes));
 
     // print(jsonResponse);
     if (jsonResponse['error'] != null) {
@@ -64,7 +66,7 @@ class ApiService {
       chatList = List.generate(
         jsonResponse["choices"].length,
         (index) => ChatModel(
-          msg: jsonResponse["choices"][index]["text"],
+          msg: jsonResponse["choices"][0]["message"]['content'],
           chatIndex: 1,
         ),
       );
