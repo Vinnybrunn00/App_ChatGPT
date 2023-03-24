@@ -1,12 +1,9 @@
-import 'package:chatgpt/models/chat_model.dart';
-import 'package:chatgpt/services/api_service.dart';
 import 'package:chatgpt/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
 import '../providers/chat_provider.dart';
 import '../providers/models_provider.dart';
 import '../services/services.dart';
 import '/constants/constants.dart';
-import '/services/assets_manager.dart';
 import '/widgets/chat_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -45,19 +42,28 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     final modelsProvider = Provider.of<ModelsProvider>(context);
     final chatProvider = Provider.of<ChatProvider>(context);
+
     return Scaffold(
-      //floatingActionButton: FloatingActionButton(
-      //  backgroundColor: Color.fromARGB(255, 0, 174, 136),
-      //  onPressed: () {},
-      //  child: const Icon(Icons.link_outlined),
-      //),
+      floatingActionButton: GestureDetector(
+        onTap: () async {
+          print('xuxa');
+        },
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          margin: const EdgeInsets.only(bottom: 55),
+          decoration: BoxDecoration(
+              color: const Color.fromARGB(255, 0, 177, 129),
+              borderRadius: BorderRadius.circular(50)),
+          child: const Icon(
+            Icons.link_rounded,
+            color: Colors.white,
+          ),
+        ),
+      ),
       appBar: AppBar(
         elevation: 2,
-        leading: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Image.asset(AssetsManager.openaiLogo),
-        ),
-        title: const Text("ChatGPT"),
+        centerTitle: true,
+        title: const Text("Novo Chat"),
         actions: [
           IconButton(
             onPressed: () async {
@@ -93,15 +99,20 @@ class _ChatScreenState extends State<ChatScreen> {
                 height: 15,
               ),
               Material(
+                elevation: 50.0,
+                shadowColor: const Color.fromARGB(255, 0, 51, 58),
                 borderRadius: const BorderRadius.vertical(
-                    top: Radius.circular(20), bottom: Radius.circular(20)),
+                    top: Radius.circular(10), bottom: Radius.circular(5)),
                 color: cardColor,
                 child: Padding(
-                  padding: const EdgeInsets.all(5.0),
+                  padding: const EdgeInsets.only(),
                   child: Row(
                     children: [
                       Expanded(
                         child: TextField(
+                          cursorColor: Colors.white,
+                          obscureText: false,
+                          autofocus: false,
                           focusNode: focusNode,
                           style: const TextStyle(color: Colors.white),
                           controller: textEditingController,
@@ -111,10 +122,8 @@ class _ChatScreenState extends State<ChatScreen> {
                                 chatProvider: chatProvider);
                           },
                           decoration: const InputDecoration.collapsed(
-                              border: UnderlineInputBorder(),
-                              hintText: "Como posso te ajudar?",
-                              hintStyle: TextStyle(
-                                  color: Color.fromARGB(255, 159, 159, 159))),
+                            hintText: null,
+                          ),
                         ),
                       ),
                       IconButton(
@@ -127,6 +136,7 @@ class _ChatScreenState extends State<ChatScreen> {
                           icon: const Icon(
                             Icons.send_outlined,
                             color: Color(0xFF00B181),
+                            size: 21,
                           ))
                     ],
                   ),

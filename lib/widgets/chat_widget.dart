@@ -1,4 +1,3 @@
-import 'dart:io';
 import 'package:animated_text_kit/animated_text_kit.dart';
 import '/constants/constants.dart';
 import 'text_widget.dart';
@@ -60,15 +59,17 @@ class Chatwidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: const [
                           Icon(
-                            Icons.thumb_up_alt,
+                            Icons.thumb_up_off_alt,
                             color: Colors.white,
+                            size: 21,
                           ),
                           SizedBox(
-                            width: 5,
+                            width: 8,
                           ),
                           Icon(
-                            Icons.thumb_down_alt,
+                            Icons.thumb_down_off_alt,
                             color: Colors.white,
+                            size: 21,
                           )
                         ],
                       )
