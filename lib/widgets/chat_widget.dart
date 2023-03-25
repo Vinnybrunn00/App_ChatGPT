@@ -76,7 +76,7 @@ class _ChatwidgetState extends State<Chatwidget> {
                                   icon: const Icon(
                                     Icons.copy,
                                     color: Colors.white,
-                                    size: 19,
+                                    size: 10,
                                   ),
                                   onPressed: () {
                                     final copymsg =
