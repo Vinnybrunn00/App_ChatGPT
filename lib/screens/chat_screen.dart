@@ -57,14 +57,15 @@ class _ChatScreenState extends State<ChatScreen> {
     return Scaffold(
       floatingActionButton: GestureDetector(
         child: Container(
-            padding: const EdgeInsets.all(4),
-            margin: const EdgeInsets.only(bottom: 65),
+            padding: const EdgeInsets.all(1),
+            margin: const EdgeInsets.only(bottom: 70),
             decoration: BoxDecoration(
                 color: const Color.fromARGB(255, 0, 177, 129),
                 borderRadius: BorderRadius.circular(50)),
             child: IconButton(
+              splashRadius: 31,
+              splashColor: Color.fromARGB(255, 255, 0, 160),
               icon: Image.asset('assets/images/github.png'),
-              iconSize: 21,
               onPressed: () {
                 try {
                   _launchUrl();
@@ -143,6 +144,8 @@ class _ChatScreenState extends State<ChatScreen> {
                         ),
                       ),
                       IconButton(
+                          splashColor: Color.fromARGB(255, 255, 0, 149),
+                          splashRadius: 15,
                           onPressed: () async {
                             await sendMessageFCT(
                               modelsProvider: modelsProvider,

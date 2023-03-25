@@ -54,18 +54,3 @@ class _ModelsDrowDownWidgetState extends State<ModelsDrowDownWidget> {
         });
   }
 }
-
-
-
-
-/*DropdownButton(
-      dropdownColor: scaffoldBackgroundColor,
-      iconEnabledColor: Colors.white,
-      items: getModelsItem,
-      value: currentModels,
-      onChanged: (value) {
-        setState(() {
-          currentModels = value.toString();
-        });
-      },
-    ); */
