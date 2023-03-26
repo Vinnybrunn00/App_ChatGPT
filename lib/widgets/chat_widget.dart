@@ -1,6 +1,5 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/services.dart';
-import '../services/api_service.dart';
 import '/constants/constants.dart';
 import 'text_widget.dart';
 import '/services/assets_manager.dart';
