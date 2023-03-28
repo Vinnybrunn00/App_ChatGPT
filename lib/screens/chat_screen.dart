@@ -1,3 +1,4 @@
+import 'package:chatgpt/constants/constants.dart';
 import 'package:chatgpt/widgets/button_github.dart';
 import 'package:chatgpt/widgets/custom_text_field.dart';
 import 'package:chatgpt/widgets/text_widget.dart';
@@ -44,6 +45,43 @@ class _ChatScreenState extends State<ChatScreen> {
     final chatProvider = Provider.of<ChatProvider>(context);
 
     return Scaffold(
+      drawer: Drawer(
+        backgroundColor: const Color(0xFF44475a),
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: <Widget>[
+            const UserAccountsDrawerHeader(
+              decoration: BoxDecoration(color: Color.fromARGB(255, 43, 39, 63)),
+              accountName: Text("CHATGPT"),
+              accountEmail: Text(
+                'Versão 1.0.7',
+                style: TextStyle(
+                  color: Color(0xFF50fa7b),
+                ),
+              ),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Color.fromARGB(255, 0, 177, 129),
+                child: Image(
+                  image: AssetImage('assets/images/logo_app.png'),
+                ),
+              ),
+            ),
+            ListTile(
+              leading: const Icon(
+                Icons.chat_bubble_outline_outlined,
+              ),
+              title: const Text(
+                'Novo Chat',
+              ),
+              iconColor: const Color.fromARGB(255, 0, 164, 99),
+              textColor: const Color.fromARGB(255, 186, 186, 186),
+              onTap: () {
+                Navigator.pop(context);
+              },
+            )
+          ],
+        ),
+      ),
       floatingActionButton: const ButtonGitHub(),
       appBar: AppBar(
         elevation: 2,
