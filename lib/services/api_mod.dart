@@ -34,7 +34,7 @@ class ApiMod {
     }
     List<ChatModel> chatList = [];
     if (jsonResponse["data"].length > 0) {
-      print(jsonResponse["data"]);
+      log(jsonResponse["data"]);
       chatList = List.generate(
         jsonResponse["data"].length,
         (index) => ChatModel(
