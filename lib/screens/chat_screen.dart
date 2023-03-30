@@ -164,8 +164,9 @@ class _ChatScreenState extends State<ChatScreen> {
         const SnackBar(
           content: Textwidget(
             label: "Escreva algo!",
+            color: Colors.red,
           ),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.transparent,
         ),
       );
       return;
@@ -185,11 +186,12 @@ class _ChatScreenState extends State<ChatScreen> {
     } catch (error) {
       log("Erro_3 File: 'chat_screen.dart' > $error");
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Textwidget(
-            label: error.toString(),
+            label: 'Requer uma chave API',
+            color: Colors.red,
           ),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.transparent,
         ),
       );
     } finally {

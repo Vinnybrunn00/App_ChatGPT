@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:ffi';
 import 'package:chatgpt/widgets/button_github.dart';
 import 'package:chatgpt/widgets/custom_text_field.dart';
 import 'package:chatgpt/widgets/text_widget.dart';
@@ -192,8 +193,9 @@ class _ChatModState extends State<ChatMod> {
         const SnackBar(
           content: Textwidget(
             label: "Escreva algo!",
+            color: Colors.red,
           ),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.transparent,
         ),
       );
       return;
@@ -213,11 +215,12 @@ class _ChatModState extends State<ChatMod> {
     } catch (error) {
       log("Erro_3 File: 'chat_mod.dart' > $error");
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
+        const SnackBar(
           content: Textwidget(
-            label: error.toString(),
+            label: 'Requer uma chave API!',
+            color: Colors.red,
           ),
-          backgroundColor: Colors.red,
+          backgroundColor: Colors.transparent,
         ),
       );
     } finally {
