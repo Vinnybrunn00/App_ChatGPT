@@ -1,24 +1,25 @@
 import 'dart:developer';
-import 'package:chatgpt/screens/chat_mod.dart';
 import 'package:chatgpt/widgets/button_github.dart';
 import 'package:chatgpt/widgets/custom_text_field.dart';
 import 'package:chatgpt/widgets/text_widget.dart';
 import 'package:provider/provider.dart';
+import '../constants/constants.dart';
 import '../providers/chat_provider.dart';
 import '../providers/models_provider.dart';
-import '../services/services.dart';
 import '/widgets/chat_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+import 'chat_screen.dart';
+
+class ChatMod extends StatefulWidget {
+  const ChatMod({super.key});
 
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  State<ChatMod> createState() => _ChatModState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _ChatModState extends State<ChatMod> {
   bool _isTyping = false;
   late TextEditingController textEditingController;
   late ScrollController _listScrollController;
@@ -45,6 +46,7 @@ class _ChatScreenState extends State<ChatScreen> {
     final modelsProvider = Provider.of<ModelsProvider>(context);
     final chatProvider = Provider.of<ChatProvider>(context);
     return Scaffold(
+      floatingActionButton: const ButtonGitHub(),
       drawer: Drawer(
         shadowColor: const Color(0xFF50fa7b),
         backgroundColor: const Color(0xFF44475a),
@@ -56,7 +58,7 @@ class _ChatScreenState extends State<ChatScreen> {
               decoration: BoxDecoration(color: Color.fromARGB(255, 43, 39, 63)),
               accountName: Text("CHATGPT"),
               accountEmail: Text(
-                'Versão 1.0.8',
+                'Versão 1.0.7',
                 style: TextStyle(
                   color: Color(0xFF50fa7b),
                 ),
@@ -73,7 +75,7 @@ class _ChatScreenState extends State<ChatScreen> {
                 Icons.chat_bubble_outline_outlined,
               ),
               title: const Text(
-                'Gerador de Imagens',
+                'Chat de Mensagem',
                 style: TextStyle(
                   color: Color.fromARGB(255, 186, 186, 186),
                   fontSize: 15,
@@ -84,7 +86,8 @@ class _ChatScreenState extends State<ChatScreen> {
               onTap: () {
                 try {
                   Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(builder: (context) => const ChatMod()),
+                      MaterialPageRoute(
+                          builder: (context) => const ChatScreen()),
                       (route) => false);
                   setState(() => chatProvider.chatList.clear());
                   log('onTap!!!');
@@ -96,17 +99,39 @@ class _ChatScreenState extends State<ChatScreen> {
           ],
         ),
       ),
-      floatingActionButton: const ButtonGitHub(),
       appBar: AppBar(
         elevation: 2,
         centerTitle: true,
-        title: const Text("Novo Chat - Mensagem"),
+        title: const Text("Novo Chat - Gerador"),
         actions: [
           IconButton(
             onPressed: () async {
-              await Services.showModalSheet(
-                context: context,
-              );
+              showModalBottomSheet(
+                  shape: const RoundedRectangleBorder(
+                      borderRadius:
+                          BorderRadius.vertical(top: Radius.circular(20))),
+                  backgroundColor: scaffoldBackgroundColor,
+                  context: context,
+                  builder: (context) {
+                    return Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Flexible(
+                              child: GestureDetector(
+                            onTap: () =>
+                                setState(() => chatProvider.chatList.clear()),
+                            child: const Textwidget(
+                              label: "Limpar Conversa",
+                              color: Color.fromARGB(255, 255, 128, 0),
+                              fontSize: 16,
+                            ),
+                          )),
+                        ],
+                      ),
+                    );
+                  });
             },
             icon: const Icon(
               Icons.more_vert_rounded,
@@ -119,7 +144,10 @@ class _ChatScreenState extends State<ChatScreen> {
         child: SafeArea(
           child: Column(
             children: [
-              Flexible(child: ChatWidget(controller: _listScrollController)),
+              Flexible(
+                  child: ChatWidget(
+                controller: _listScrollController,
+              )),
               if (_isTyping) ...[
                 const SpinKitThreeBounce(
                   color: Colors.white,
@@ -180,10 +208,10 @@ class _ChatScreenState extends State<ChatScreen> {
           focusNode.unfocus();
         },
       );
-      await chatProvider.sendMessageAndGetAnswers(
+      await chatProvider.sendMessageAndGetImage(
           msg: msg, chosenModelId: modelsProvider.getCurrentModel);
     } catch (error) {
-      log("Erro_3 File: 'chat_screen.dart' > $error");
+      log("Erro_3 File: 'chat_mod.dart' > $error");
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Textwidget(

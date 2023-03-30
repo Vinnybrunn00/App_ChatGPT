@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'dart:io';
 import 'package:chatgpt/constants/api_consts.dart';
 import 'package:chatgpt/models/chat_model.dart';
@@ -26,7 +27,7 @@ class ApiService {
       }
       return ModelsModel.modelsFromSnapshot(temp);
     } catch (error) {
-      print("Erro_1 File: 'api_service.dart' > $error");
+      log("Erro_1 File: 'api_service.dart' > $error");
       rethrow;
     }
   }
@@ -36,7 +37,7 @@ class ApiService {
       {required String message, required String modelId}) async {
     // try aqui
     // try {
-    print("modelId > $modelId");
+    log("modelId > $modelId");
     var response = await http.post(Uri.parse("$BASE_URL/chat/completions"),
         headers: {
           'Authorization': 'Bearer $API_KEY',
@@ -65,7 +66,7 @@ class ApiService {
       chatList = List.generate(
         jsonResponse["choices"].length,
         (index) => ChatModel(
-          msg: jsonResponse["choices"][0]["message"]['content'],
+          msg: jsonResponse["choices"][0]['message']['content'],
           chatIndex: 1,
         ),
       );

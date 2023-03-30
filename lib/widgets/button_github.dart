@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -37,7 +38,7 @@ class _ButtonGitHubState extends State<ButtonGitHub> {
             try {
               _launchUrl();
             } catch (e) {
-              print('error $e');
+              log('error $e');
             }
           },
         ),
