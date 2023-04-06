@@ -122,7 +122,7 @@ class _ChatScreenState extends State<ChatScreen> {
               Flexible(child: ChatWidget(controller: _listScrollController)),
               if (_isTyping) ...[
                 const SpinKitThreeBounce(
-                  color: Colors.white,
+                  color: Color(0xFF50fa7b),
                   size: 18,
                 ),
               ],

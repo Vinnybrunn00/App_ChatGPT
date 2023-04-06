@@ -149,8 +149,8 @@ class _ChatModState extends State<ChatMod> {
                 controller: _listScrollController,
               )),
               if (_isTyping) ...[
-                const SpinKitThreeBounce(
-                  color: Colors.white,
+                const SpinKitFadingFour(
+                  color: Color(0xFF50fa7b),
                   size: 18,
                 ),
               ],
